@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Renew Key{% endblock %}
+
+{% block content %}
+      <h2>Renew your key:</h2>
+      {% if not success %}
+        {% if error %}<p style="text-align:center;color:red"><b>Error:</b> {{ error }}</p>
+        {% else %}
+          <p style="text-align:center">Your key has expired. You can renew your key here.
+          <br/>The required password has been sent to your email address.</p>
+          <p style="text-align:center">Please, upload your public key.<br /><br />
+          <form style="text-align:center" enctype="multipart/form-data" action="/renew/{{ username }}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Renew" />
+          </form>
+          </p>
+        {% endif %}
+      {% endif %}
+      {% if success %}
+      <p style="text-align:center"><b>Success:</b> {{ success }}</p>
+      {% endif %}
+{% endblock %} 

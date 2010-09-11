@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+      <h2>Login:</h2>
+      <div style="text-align:center">
+      {% if error %}
+      <p style="color:red"><b>Error: </b>{{ error }}</p>
+      {% endif %}
+      {% if form %}
+      <form action="/login/" method="post">
+        {% csrf_token %}
+        <p><b>Username:</b> {{ form.username }}</p>
+        {% if goto_stage = "afterpass" %}
+        <p>Decrypt the following PGP-encrypted password with your Private Key and use it in the password field below:</p> 
+        <div id="vote_receipt"><pre>{{ password }}</pre></div>
+        <p><b>Password:</b> {{ form.password }}</p>
+        {% endif %}
+        <input type="hidden" name="stage" value="{{ goto_stage }}" />
+        <input style="font-weight:bold;font-size:large" type="submit" value="Login" />
+      </form>
+      {% endif %}
+      </div>
+{% endblock %} 

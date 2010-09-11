@@ -1,0 +1,35 @@
+GPGVote is a web-based e-voting system, based on PGP encryption.
+
+
+Detailed Description:
+---------------------
+GPGVote is a web-based electronic voting system developed in Django.
+It is meant to be used by communities or organizations as a method for
+decision making, opinion gathering and assigning roles. The security
+requirements of GPGVote are met with the use of strong encryption models
+provided by the GnuPG encryption software and users of the system are
+registered and authenticated by their PGP keys. Several operations are
+provided to the users of GPGVote to create polls, participate in polls
+they have the right to vote for and verify the outcome of each poll they
+participate, as well as the inclusion of their own vote in the final results.
+
+The project was started by Petros Moisiadis as his thesis for a bachelor
+degree in Information Technology from Digital Systems department of University
+of Pireaus. This thesis (currently available only in greek language) contains
+more information about the project and may be downloaded from here:
+http://dtps.unipi.gr/~ernest0x/files/thesis.pdf
+
+Prerequisites:
+--------------
+Django (of course): Tested with 1.2.1 and 1.2.3
+python-gnupg: Patched with my patches found on issues 13 and 15 
+              (see: http://code.google.com/p/python-gnupg/issues/)
+django-gpgauth: Included
+
+License:
+--------
+GPL-3.0. Read LICENSE for more info
+
+Project site:
+-------------
+http://github.com/Ernest0x/gpgvote

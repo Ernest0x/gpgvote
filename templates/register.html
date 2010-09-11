@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+      <div style="text-align:center">
+      <h2>Register:</h2>
+      <p>Please, upload your public key.</p>
+      {% if not success %}
+      {% if error %}<p style="color:red"><b>Error:</b> {{ error }}</p>{% endif %}
+      <form enctype="multipart/form-data" action="/register/" method="post">
+        {% csrf_token %}
+        <b>{{ form.as_p }}</b>
+        <input style="font-weight:bold;font-size:large" type="submit" value="Register" />
+      </form>
+      {% endif %}
+      {% if success %}
+      <p><b>Success:</b> {{ success }}</p>
+      {% endif %}
+      </div>
+{% endblock %} 

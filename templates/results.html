@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+      <h2>Results:</h2>
+      <p style="text-align:center">
+        <b>Poll: &quot;{{ poll.question }}&quot;</b><br />
+        Created by <b>{{ poll.creator.pgpkey.name }}</b> &lt;{{ poll.creator }}&gt;<br /><br />
+      </p>
+        {% if not total_abstention %}
+          <table align="center" cellpadding="10">
+          <tr>
+            <th id="results_first_col" class="results_th">Choice</th>
+            <th id="results" class="results_th">Votes</th>
+            <th id="results" class="results_th">%</th>
+          </tr>
+          {% for result in results %}
+            <tr>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}" id="results_first_col">{{ result.0 }}</td>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}" id="results">{{ result.1.0 }}</td>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}" id="results">
+                <img src="/site_media/images/percentage_bar.png" height="11" width="{{ result.1.1|add:"2" }}" />
+                <br />{{ result.1.1 }}
+              </td>
+            </tr>
+          {% endfor %}
+          </table>
+          <p style="text-align:justify"> 
+            You may verify the results by viewing the anonymous <a href="/results/{{ poll.id }}/votes_list">Votes List</a>.
+            <br />Each individual voter may check that her vote has been calculated in the final results by verifying in the 
+            list the corresponding vote tag supplied to her when she casted her vote.
+          </p>
+        {% else %}
+          <p style="text-align:center">Total Abstention</p>
+        {% endif %}
+
+{% endblock %} 

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <link rel="stylesheet" href="/site_media/css/style.css" />
+    <script src="/site_media/js/gpgvote.js" language="javascript" type="text/javascript"></script>
+    <title>{% block title %}GPGVote{% endblock %}</title>
+  </head>
+
+  <body>
+
+    <div id="header">
+      <img src="/site_media/images/gpgvote_logo.png" />
+    </div>
+
+    <div id="menubar">
+      <div id="site_actions">
+        <ul id="menulist">
+          <li><a href="/">Home</a></li>
+          {% if not logged_in %}
+            <li><a href="/register/">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+ 
+      <div id="login_actions">
+        <ul id="menulist">
+           {% if not logged_in %}
+             <li><a href="/login/">Login</a></li>
+           {% endif %}
+           {% if logged_in %}
+             <li><b>logged in as: </b>{{ user }}</li>
+             <li><a href="/logout/">Logout</a></li>
+           {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+
+  </body>
+</html>

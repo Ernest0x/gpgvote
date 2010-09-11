@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}My Polls{% endblock %}
+
+{% block content %}
+      <h2>User Info:</h2>
+      <table id="userinfo_table" align="center">
+        <tr>
+          <th>Name:</th>
+          <td><b>{{ requested_user.pgpkey.name }}</b></td>
+        </tr>
+        <tr>
+          <th>E-mail:</th>
+          <td><a href="mailto:{{ requested_user.email }}">{{ requested_user.email }}</a></td>
+        </tr>
+        <tr>
+          <th>Public PGP key fingerprint:</th>
+          <td>{{ requested_user.pgpkey }}</td>
+        </tr>
+        <tr>
+          <th>Trusted by the Authority:</th>
+          <td>
+            {% if requested_user.pgpkey.is_trusted %}
+              <span style="color:green">Yes</span>
+            {% else %}
+              <span style="color:red">No</span>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+
+{% endblock %} 

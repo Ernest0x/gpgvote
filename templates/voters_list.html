@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Voters{% endblock %}
+
+{% block content %}
+
+      <h2>Voters List:</h2>
+      <p style="text-align:center">
+        <b>Poll: &quot;{{ poll.question }}&quot;</b><br />
+        Created by <b>{{ poll.creator.pgpkey.name }}</b> &lt;{{ poll.creator }}&gt;<br /><br />
+      </p>
+        <table align="center">
+          <tr><th class="results_th">Allowed Voters</th></tr>
+          {% for voter in voters %}
+            <tr>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}">
+                <a href="/userinfo/{{ voter.id }}">{{ voter.pgpkey.name }} &lt;{{ voter.username }}&gt;</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+
+{% endblock %} 

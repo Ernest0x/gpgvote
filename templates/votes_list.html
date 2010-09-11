@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+
+      <h2>Votes List:</h2>
+      <p style="text-align:center">
+        <b>Poll: &quot;{{ poll.question }}&quot;</b><br />
+        Created by <b>{{ poll.creator.pgpkey.name }}</b> &lt;{{ poll.creator }}&gt;<br /><br />
+      </p>
+      {% if not total_abstention %}
+        <table align="center">
+          <tr><th class="results_th">Vote Tag</th><th class="results_th">Choices</th></tr>
+          {% for tag in votes %}
+            <tr>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}">{{ tag.0 }}</td>
+              <td class="{% cycle 'results_td_even' 'results_td_odd' %}">
+                 <ul>
+                 {% for vote in tag.1 %}
+                   <li>{{ vote }}</li>
+                 {% endfor %}
+                 </ul>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p style="text-align:center">Total Abstention</p>
+      {% endif %}
+
+{% endblock %} 

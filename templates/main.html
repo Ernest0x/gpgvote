@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+      <h2>Welcome to GPGVote!</h2>
+      <p>
+        <b>GPGVote</b> is a <b><i>Web-based electronic voting system</i></b> that implements its security requirements with the use 
+        of <b><i>PGP keys</i></b>.
+      </p>
+      <p>
+        GPGVote is considered an academic project, originally designed and implemented by 
+        <a href="mailto:ernest0x@dtps.unipi.gr">Petros Moisiadis</a> as his graduate thesis in Information Technology.
+      <p>
+      {% if logged_in %}
+      <div id="main_functions">
+        <table cellspacing="40" cellpadding="25" align="center">
+          <tr>
+            <td><a href="./mypolls/"><img src="/site_media/images/mypolls.png" /></a><br /><b>My Polls</b></td>
+            <td><a href="./createpoll/"><img src="/site_media/images/create_poll.png" /></a><br /><b>Create Poll</b></td>
+          </tr>
+        </table>
+      </div>
+      {% endif %}
+{% endblock %} 

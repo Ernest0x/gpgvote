@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}My Polls{% endblock %}
+
+{% block content %}
+      {% if pending_polls %}<h2>Pending Polls:</h2>{% endif %}
+        {% for p in pending_polls %}
+          {% if p.allowed_actions %}
+            <table id="poll_table" align="center">
+              <tr>
+                <th>Poll Question</th>
+                <td><b>{{ p.poll.question }}</b></td>
+              </tr>
+              <tr>
+                <th>Created by:</th>
+                <td>
+                  <a href="/userinfo/{{ p.poll.creator.id }}">
+                    {{ p.poll.creator.pgpkey.name }} &lt;{{ p.poll.creator.username }}&gt;
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <th>Allowed Voters:</th>
+                <td>
+                  <a href="/voters_list/{{ p.poll.id }}">Show list of allowed voters</a>
+                </td>
+              </tr>
+              <tr>
+                <th>{% if p.allowed_actions == 'edit' %}Starts:{% else %}Started:{% endif %}</th>
+                <td>{{ p.poll.starts }}</td>
+              </tr>
+              <tr>
+                <th>Ends:</th>
+                <td>{{ p.poll.ends }}</td>
+              </tr>
+              <tr>
+                <th>Actions:</th>
+                <td>
+                  <ul id="menulist">
+                    {% if p.allowed_actions == 'edit' %}
+                      <li>
+                        <a href="/editpoll/{{ p.poll.id }}"><img class="textmiddle" src="/site_media/images/poll_edit.png" /> Edit</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="delconfirm('{{ p.poll.id }}')">
+                          <img class="textmiddle" src="/site_media/images/poll_delete.png" /> Delete
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if p.allowed_actions == 'vote' %}
+                      <li>
+                        <a href="/vote/{{ p.poll.id }}"><img class="textmiddle" src="/site_media/images/vote.png" /> Vote</a>
+                      </li>
+                    {% endif %}
+                    {% if p.allowed_actions == 'results' %}
+                      <li>
+                        <a href="/results/{{ p.poll.id }}"><img class="textmiddle" src="/site_media/images/results.png" /> Results</a>
+                      </li>
+                    {% endif %}
+                    {% if p.allowed_actions == 'wait' %}<i>You have already voted. Please, wait for the results.</i>{% endif %}
+                    {% if p.allowed_actions == 'wait_creator' %}<i>Please, wait for the results.</i>{% endif %}
+                  </ul>
+                </td>
+              </tr>
+            </table>
+            <br />
+          {% endif %}
+        {% endfor %}
+        
+      {% if ended_polls %}
+        <h2>Ended Polls:</h2>
+      {% endif %}
+        {% for p in ended_polls %}
+            <table id="poll_table" align="center">
+              <tr>
+                <th>Poll Question</th>
+                <td><b>{{ p.poll.question }}</b></td>
+              </tr>
+              <tr>
+                <th>Created by:</th>
+                <td>
+                  <a href="/userinfo/{{ p.poll.creator.id }}">
+                    {{ p.poll.creator.pgpkey.name }} &lt;{{ p.poll.creator.username }}&gt;
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <th>Allowed Voters:</th>
+                <td>
+                  <a href="/voters_list/{{ p.poll.id }}">Show list of allowed voters</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Started:</th>
+                <td>{{ p.poll.starts }}</td>
+              </tr>
+              <tr>
+                <th>Ended:</th>
+                <td>{{ p.poll.ends }}</td>
+              </tr>
+              <tr>
+                <th>Actions:</th>
+                <td>
+                  <ul id="menulist">
+                    <li>
+                      <a href="/results/{{ p.poll.id }}"><img class="textmiddle" src="/site_media/images/results.png" /> Results</a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+            <br />
+        {% endfor %}
+      
+{% endblock %} 

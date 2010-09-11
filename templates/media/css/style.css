@@ -1,0 +1,222 @@
+body
+{
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: Verdana, sans-serif;
+  background-color: white;
+}
+
+a:link { color: #00BF00 }
+a:visited { color: #005200 }
+a { text-decoration: none }
+
+img
+{
+  border: 0px;
+}
+
+h2
+{
+  text-align: center;
+}
+
+.textmiddle { vertical-align:middle; } 
+
+#header
+{
+  text-align: center;
+  height: 70px;
+  padding-top: 15px;
+}
+
+#site_actions
+{
+  float: left;
+  padding-left: 15px;
+}
+
+#menubar
+{
+  background-color: #CCFFCC;
+  height: 35px;
+  font-size: small;
+  border-top: 1px solid #00BF00;
+  border-bottom: 1px solid #00BF00;
+}
+
+#menubar a
+{
+  color: #00583D;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#menubar a:hover
+{
+  color: #00BF00;
+}
+
+#login_actions
+{
+  float: right;
+}
+
+#content
+{
+  clear: both;
+  padding-top: 5px;
+}
+
+#menulist
+{
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 7px;
+} 
+
+#menulist li
+{
+  padding-right: 15px;
+  display: inline;
+  list-style-type: none;
+}
+
+#main_functions
+{
+  text-align: center;
+  text-decoration: none;
+  color: #00583D;
+}
+
+#main_functions img:hover
+{
+  background-color: #CCFFCC;
+  border: 1px dotted #00BF00;
+}
+
+#poll_edit th
+{
+  background-color: #FBFFFB;
+  border-top: 1px solid #00BF00;
+  border-bottom: 1px solid #00BF00;
+}
+
+#poll_edit textarea, select, input[type=text]
+{
+  background-color: #F2F2F2;
+}
+
+#poll_edit textarea:focus, select:focus, input[type=text]:focus
+{
+  background-color: #FFF0B3;
+}
+
+#id_choices, #id_choice, #id_question
+{
+  min-width: 450px;
+}
+
+#id_choices
+{
+  min-height: 200px;
+  max-height: 300px;
+}
+
+#id_allowed_voters
+{
+  width: 350px;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+#error_td
+{
+  max-width: 350px;
+}
+
+#poll_table
+{
+  width: 800px;
+}
+
+#poll_table td
+{
+  text-align: center;
+  padding: 10px;
+  background-color: #FEF4F4;
+  border-top: 1px solid #FEC0C0;
+  border-bottom: 1px solid #FEC0C0;
+}
+
+#poll_table th
+{
+  background-color: #E8FFE8;
+  border-top: 1px solid #00BF00;
+  border-bottom: 1px solid #00BF00;
+  width: 150px;
+}
+
+#userinfo_table td
+{
+  text-align: center;
+  padding: 10px;
+  background-color: #FEF4F4;
+  border-top: 1px solid #FEC0C0;
+  border-bottom: 1px solid #FEC0C0;
+}
+
+#userinfo_table th
+{
+  background-color: #E8FFE8;
+  border-top: 1px solid #00BF00;
+  border-bottom: 1px solid #00BF00;
+  padding: 10px;
+}
+
+#results
+{
+  text-align: right;
+  max-width: 150px;
+}
+
+#results_first_col
+{
+  text-align: left;
+  max-width: 450px;
+}
+
+.results_th
+{
+  background-color: #E8FFE8;
+  border-top: 1px solid #00BF00;
+  border-bottom: 1px solid #00BF00;
+  padding: 10px;
+}
+
+.results_td_even
+{
+  background-color: #FEF4F4;
+  padding: 10px;
+}
+
+.results_td_odd
+{
+  background-color: #FEE9E9;
+  padding: 10px;
+}
+
+#vote_receipt
+{
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width:35em;
+  background-color: #E8FFE8;
+  border: 1px dotted #00BF00;
+  padding: 10px;
+}

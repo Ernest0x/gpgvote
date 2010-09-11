@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Vote{% endblock %}
+
+{% block content %}
+      {% if not success %}
+      <h2>Vote:</h2>
+      <form action="/vote/{{ poll.id }}/" method="post">
+        {% csrf_token %}
+        <table align="center">
+         <tr><th colspan="2">{{ poll.question }}</th></tr>
+         <tr><td colspan="2" height="10"></td></tr>
+         {% for choice in choices %}
+           <tr>
+             <td>{{ choice.choice }}</td>
+             <td>
+               <input type="{{ choice_type }}" name="choices" id="{{ choice.id }}" value="{{ choice.id }}" 
+                      onchange="checkChoices('{{ choice.id }}', {{ poll.max_choices }})"/>
+             </td>
+           </tr>
+         {% endfor %}
+        </table>
+        <br />
+        {% if error %}<p style="text-align:center;color:red"><b>Error: </b><i>{{ error }}</i></p><br />{% endif %}
+        <p style="text-align:center"><input style="font-weight:bold;font-size:large" type="submit" value="Vote" /></p>
+      </form>
+      {% else %}
+        <p style="text-align:center">
+          {{ success }}:<br /><br />
+          <b>&quot;{{ poll.question }}&quot;</b>,<br />
+          Created by <b>{{ poll.creator.pgpkey.name }}</b> &lt;{{ poll.creator }}&gt;<br /><br />
+          Your vote corresponds to the following, encrypted vote receipt: <br />
+          <div id="vote_receipt">
+            <b><pre>{{ vote_receipt }}</pre></b>
+          </div>
+        </p>
+        <p style="text-align:center"><i>You should keep a copy of the above PGP message!</i></p>
+        <p style="text-align:justify">
+          You may decrypt this vote receipt with your private key and use it to verify that your vote has been 
+          correctly calculated in the final tally when this poll ends.<br />
+          You should not store the decrypted form of the vote receipt anywhere.
+        </p>
+        <p style="text-align:justify">
+          The above PGP message is signed by the GPGVote System Authority.<br />
+          You can download the public key of the GPGVote System Authority from
+          <a href="/site_media/gpgvote_authority_public_key.asc">here</a>.
+        </p>
+      {% endif %}
+
+{% endblock %} 

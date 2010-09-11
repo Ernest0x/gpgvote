@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Create Poll{% endblock %}
+
+{% block content %}
+      <h2>{{ action|capfirst }} your Poll:</h2>
+      {% if not success %}
+      {% if action == "create" %}
+      <form action="/createpoll/" method="post">
+      {% else %}
+      <form action="/editpoll/{{ poll_id }}/" method="post">
+      {% endif %}
+        {% csrf_token %}
+        <br />
+        <table cellpadding="10" align="center">
+           <tr>
+              <td valign="top" style="border-right: 1px dashed green">
+
+                <table id="poll_edit">
+                  <tr><th>Question:</th></tr>
+                  <tr><td>{{ form.question }}</td></tr>
+                  <tr><td id="error_td">{{ form.question.errors }}</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><th>Choice:</th></tr>
+                  <tr><td><textarea id="id_choice" rows="2" name="choice"></textarea></td></tr>
+                  <tr>
+                    <td align="center">
+                      <input type="button" value="Add Choice" name="add_choice" onclick="addChoice('id_choice', 'id_choices')" />
+                    </td>
+                  </tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><th>Added Choices:</th></tr>
+                  <tr>
+                    <td>
+                      <select multiple="multiple" id="id_choices" name="choices">
+                        {% for choice in choices %}
+                          <option value="{{ choice }}">{{ choice}}</option>
+                        {% endfor %}
+                      </select>
+                    </td>
+                  </tr>
+                  <tr><td id="error_td">{{ choices_error|safe }}</td></tr></tr>
+                  <tr>
+                    <td align="center">
+                      <input type="button" value="Remove Choice(s)" name="remove_choice" onclick="removeChoices('id_choices')"/>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+              <td valign="top">
+
+                <table id="poll_edit">
+                  <tr><th align="left">Min. number of choices per vote:</th></tr><tr><td>{{ form.min_choices }}</td></tr>
+                  <tr><th align="left">Max. number of choices per vote:</th></tr><tr><td>{{ form.max_choices }}</td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.max_choices.errors }} {{ num_of_choices_error|safe }}</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><th colspan="2">Starts:</th></tr>
+                  <tr><td colspan="2">Date: {{ form.starts_date }}</td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.starts_date.errors }}  {{ dates_error|safe }}</td></tr>
+                  <tr><td colspan="2">Time: {{ form.starts_time }} <small><i> (in "hh:mm" format)</i></small></td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.starts_time.errors }}</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><th colspan="2">Ends:</th></tr>
+                  <tr><td colspan="2">Date: {{ form.ends_date }}</td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.ends_date.errors }}  {{ dates_error|safe }}</td></tr>
+                  <tr><td colspan="2">Time: {{ form.ends_time }} <small><i> (in "hh:mm" format)</i></small></td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.ends_time.errors }}</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><th colspan="2">Select Voters:</th></tr>
+                  <tr><td colspan="2">{{ form.allowed_voters }}</td></tr>
+                  <tr><td colspan="2" id="error_td">{{ form.allowed_voters.errors }} {{ allowed_voters_error|safe }}</td></tr>
+                  <tr>
+                    <td colspan="2" align="center">
+                      <input type="button" value="None" name="select_none" onclick="selectChoices('none', 'id_allowed_voters')" />
+                      <input type="button" value="All" name="select_all" onclick="selectChoices('all', 'id_allowed_voters')" />
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+           </tr>
+           <tr><td colspan="2"><hr /></td></tr>
+        </table>
+        <div align="center">
+          <input style="font-size: large; font-weight: bold" type="submit" value="{{ action|capfirst }} Poll" onclick="selectChoices('all', 'id_choices')" />
+        </div>
+      </form>
+      {% else %}
+      <p>{{ success }}</p>
+      {% endif %}
+{% endblock %} 
